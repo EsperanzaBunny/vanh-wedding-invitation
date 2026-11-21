@@ -76,7 +76,7 @@ This only confirms configuration is present. Test the actual database next:
 
 If the guest gets a Vercel sign-in prompt, check the project's deployment protection settings for Production. The app's own host dashboard remains password-protected. A guest RSVP link is private by possession: anyone with the link can answer for that household.
 
-If status is false, check variable names, Production scope and redeploy. If host login succeeds but database access fails, confirm the SQL script ran and the project URL and secret key belong to the same active project. No public Supabase table policy is needed for this server-backed app.
+If status is false, the `missing` array names exactly which values the function cannot see, for example `{"configured":false,"missing":["HOST_PASSWORD"]}`. Check those variable names in this Vercel project, ensure Production is selected, save, and redeploy. The endpoint never returns credential values. If host login succeeds but database access fails, confirm the SQL script ran and the project URL and secret key belong to the same active project. No public Supabase table policy is needed for this server-backed app.
 
 ## Free-tier availability
 
@@ -91,3 +91,21 @@ Sources checked 21 November 2026:
 - https://supabase.com/pricing
 
 Local verification: production build and 12 tests pass. A simulated browser check verifies that a live guest receives the name/theme from the stored record, URL overrides are ignored, and both theme pickers are hidden. An actual hosted database and production deployment still need the account setup above.
+
+
+## Diagnosing a guest-list failure after configuration succeeds
+
+`configured: true` confirms that values exist; it does not test the Supabase connection. The API now returns a safe `code` alongside failed operations:
+
+| Code | Check |
+| --- | --- |
+| `SUPABASE_URL_INVALID` | Set the project root URL, `https://<project-ref>.supabase.co`, using Project URL in Supabase Connect/API. |
+| `SUPABASE_UNREACHABLE` | Confirm the project URL exists and the Supabase project is active. |
+| `SUPABASE_TIMEOUT` | Check project availability and retry. |
+| `SUPABASE_KEY_INVALID` / `SUPABASE_KEY_REJECTED` | Use a backend secret key from the same project. |
+| `INVITATIONS_TABLE_MISSING` | Run `supabase/schema.sql` in the correct project's SQL Editor. |
+| `SUPABASE_PERMISSION_DENIED` | Verify the backend key and the schema script's service-role grant. |
+| `SUPABASE_INVALID_RESPONSE` | Confirm the URL points to the project Data API root rather than a dashboard page. |
+| `INTERNAL_ERROR` | Inspect Vercel runtime logs for `RSVP_API_ERROR`. |
+
+Runtime logs record classifications and upstream HTTP status only. Raw exceptions and credential values are deliberately not logged or returned. Review logs in the project's Logs panel: https://vercel.com/docs/logs/runtime.
