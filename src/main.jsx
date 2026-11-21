@@ -5,6 +5,7 @@ import { readDemo, writeDemo, inviteUrl, request, csv } from "./data";
 import "./styles.css";
 import "./typography.css";
 import EnvelopeOpening from "./EnvelopeOpening";
+import "./glass.css";
 
 function Icon({ name, size = 20, ...props }) {
   const paths = {
@@ -72,13 +73,15 @@ function Flourish() {
 }
 function App() {
   const params = new URLSearchParams(location.search);
+  const isGuestLink = params.has("invite") || params.has("guest");
+  const isHostRoute = params.has("host") && !isGuestLink;
   const [theme, setTheme] = useState(
     themes.some((t) => t.id === params.get("style"))
       ? params.get("style")
       : "glass",
   );
-  const [opened, setOpened] = useState(params.has("host"));
-  const [introVisible, setIntroVisible] = useState(!params.has("host"));
+  const [opened, setOpened] = useState(isHostRoute);
+  const [introVisible, setIntroVisible] = useState(!isHostRoute);
   const [mode, setMode] = useState("loading");
   const [guest, setGuest] = useState(
     (!params.has("invite") && params.get("guest")?.slice(0, 120)) ||
@@ -88,7 +91,7 @@ function App() {
   const [invalid, setInvalid] = useState("");
   const [lightbox, setLightbox] = useState(null);
   const [toast, setToast] = useState("");
-  const [host, setHost] = useState(params.has("host"));
+  const [host, setHost] = useState(isHostRoute);
   const detailRef = useRef(null);
   const token = params.get("invite");
   useEffect(() => {
@@ -103,7 +106,13 @@ function App() {
       try {
         const status = await request("?action=status");
         if (!active) return;
-        setMode(status.configured ? "live" : "demo");
+        setMode(
+          status.configured
+            ? "live"
+            : import.meta.env.DEV
+              ? "demo"
+              : "unconfigured",
+        );
         if (token) {
           if (!status.configured) {
             setInvalid(
@@ -126,7 +135,7 @@ function App() {
         }
       } catch (err) {
         if (active) {
-          setMode("demo");
+          setMode(import.meta.env.DEV ? "demo" : "unavailable");
           if (token)
             setInvalid(
               "Chưa thể tải thiệp cá nhân. Vui lòng kiểm tra liên kết hoặc thử lại sau.",
@@ -216,7 +225,7 @@ function App() {
             RSVP <Icon name="mail" size={17} />
           </button>
         </header>
-        {!token && (
+        {!isGuestLink && (
           <div className="style-bar">
             <span className="style-caption">CHỌN MỘT CẢM XÚC</span>
             <div className="theme-switch" aria-label="Phong cách thiệp">
@@ -279,15 +288,27 @@ function App() {
               ) : (
                 <button
                   className="primary open-button"
-                  aria-haspopup="dialog"
-                  onClick={() => setIntroVisible(true)}
+                  aria-haspopup={theme === "glass" ? undefined : "dialog"}
+                  onClick={() =>
+                    theme === "glass" ? go("rsvp") : setIntroVisible(true)
+                  }
                 >
-                  <Icon name="mail" />
-                  Xem lại khoảnh khắc mở thiệp
+                  <Icon name={theme === "glass" ? "heart" : "mail"} />
+                  {theme === "glass"
+                    ? "Xác nhận tham dự"
+                    : "Xem lại khoảnh khắc mở thiệp"}
                   <span className="button-spark">✧</span>
                 </button>
               )}
               <p className="interaction-hint">Một lời mời dành riêng cho bạn</p>
+              {theme === "glass" && (
+                <button
+                  className="hero-replay"
+                  onClick={() => setIntroVisible(true)}
+                >
+                  Xem lại khoảnh khắc mở thiệp
+                </button>
+              )}
             </div>
             <div className="hero-art">
               <div className="arch-outline" />
@@ -510,6 +531,7 @@ function App() {
               guest={guest}
               invite={invite}
               token={token}
+              nameLocked={isGuestLink}
               invalid={invalid}
               setToast={setToast}
             />
@@ -535,14 +557,16 @@ function App() {
             {wedding.groom} & {wedding.bride} · {wedding.dateLabel}
           </span>
           <span>Được viết bằng tất cả yêu thương.</span>
-          <button onClick={() => setHost(true)}>Dành cho chủ tiệc</button>
+          {!isGuestLink && import.meta.env.DEV && (
+            <button onClick={() => setHost(true)}>Dành cho chủ tiệc</button>
+          )}
         </footer>
       </div>
       {introVisible && (
         <EnvelopeOpening
           guest={guest}
           theme={theme}
-          onThemeChange={token ? null : setTheme}
+          onThemeChange={isGuestLink ? null : setTheme}
           onComplete={finishOpening}
         />
       )}
@@ -613,7 +637,7 @@ function download(content, name, type) {
   a.click();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
-function Rsvp({ mode, guest, invite, token, invalid, setToast }) {
+function Rsvp({ mode, guest, invite, token, nameLocked, invalid, setToast }) {
   const [name, setName] = useState(guest),
     [attending, setAttending] = useState("yes"),
     [size, setSize] = useState("1"),
@@ -639,6 +663,10 @@ function Rsvp({ mode, guest, invite, token, invalid, setToast }) {
     }
     setState("sending");
     try {
+      if (!["live", "demo"].includes(mode))
+        throw new Error(
+          "Hiện chưa thể gửi lời hồi đáp trực tuyến. Vui lòng thử lại sau.",
+        );
       if (mode === "live") {
         if (!token)
           throw new Error(
@@ -733,7 +761,9 @@ function Rsvp({ mode, guest, invite, token, invalid, setToast }) {
               <p className="mode-note">
                 {mode === "loading"
                   ? "Đang kiểm tra kết nối RSVP…"
-                  : "Chế độ xem thử · Hồi đáp được lưu trên thiết bị này."}
+                  : mode === "demo"
+                    ? "Chế độ xem thử · Hồi đáp được lưu trên thiết bị này."
+                    : "Hiện chưa thể gửi lời hồi đáp trực tuyến. Vui lòng liên hệ cô dâu, chú rể."}
               </p>
             )}
             {mode === "live" && !token && (
@@ -747,7 +777,7 @@ function Rsvp({ mode, guest, invite, token, invalid, setToast }) {
               autoComplete="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              readOnly={Boolean(invite)}
+              readOnly={Boolean(invite) || nameLocked}
               maxLength={120}
               required
             />
@@ -820,7 +850,7 @@ function Rsvp({ mode, guest, invite, token, invalid, setToast }) {
               className="primary"
               disabled={
                 state === "sending" ||
-                mode === "loading" ||
+                !["live", "demo"].includes(mode) ||
                 Boolean(invalid) ||
                 (mode === "live" && !token)
               }
@@ -954,6 +984,8 @@ function Host({ mode, theme, onClose, setToast }) {
     setError("");
     setBusy(true);
     try {
+      if (!["live", "demo"].includes(mode))
+        throw new Error("Chưa kết nối hệ thống khách mời.");
       let row;
       if (mode === "live") {
         row = await request("?action=create", {
@@ -1028,6 +1060,21 @@ function Host({ mode, theme, onClose, setToast }) {
         <p>Tạo thiệp có tên riêng và theo dõi lời hồi đáp của từng khách.</p>
         {mode === "loading" ? (
           <p role="status">Đang kiểm tra máy chủ…</p>
+        ) : ["unconfigured", "unavailable"].includes(mode) ? (
+          <div className="host-connection-state">
+            <p className="mode-note" role="status">
+              {mode === "unconfigured"
+                ? "Chưa kết nối hệ thống khách mời. Vui lòng cấu hình SUPABASE_URL, SUPABASE_SECRET_KEY và HOST_PASSWORD trong Vercel, chạy tệp supabase/schema.sql, sau đó triển khai lại."
+                : "Không thể kết nối hệ thống khách mời. Vui lòng kiểm tra kết nối hoặc thử lại sau."}
+            </p>
+            <p>
+              Thiệp cá nhân chỉ được tạo khi hệ thống đã kết nối để lời hồi đáp
+              được gửi đến chủ tiệc.
+            </p>
+            <button className="secondary" onClick={() => location.reload()}>
+              Kiểm tra lại kết nối
+            </button>
+          </div>
         ) : mode === "live" && !authenticated ? (
           <form onSubmit={login} className="host-login">
             <label htmlFor="host-password">Mật khẩu chủ tiệc</label>

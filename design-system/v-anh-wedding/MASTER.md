@@ -11,3 +11,6 @@ The UI/UX search returned relevant romantic serif/script typography and rose col
 - Native labeled form controls, visible focus, keyboard-trapped dismissible dialogs, 44px actions, responsive layouts down to 320px.
 - Wedding details in src/config.js are transcribed from supplied print invitation images; the RSVP deadline remains unset. Do not present invented biographies or testimonials as fact.
 - Demo persistence is explicitly browser-local. Live RSVP uses unique private tokens and server-side validation; host operations require a server-side password. No public guest roster.
+
+- Glass edition refinement: photography leads the hero, with a readable frosted panel over the image on desktop and an overlapping panel below the photo on mobile. RSVP is the primary hero action; opening replay is secondary. The original envelope artwork is preserved inside a softly blurred garden setting. Theme-specific implementation is in src/glass.css.
+- Guest URLs, including named previews, hide theme selection and host navigation. Live choices remain bound to the database record. Production must not fall back to browser-local invitation creation if the backend is missing or unavailable.

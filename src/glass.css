@@ -1,0 +1,471 @@
+/* Forest glass: photography behind translucent surfaces, generous editorial type. */
+:root[data-theme="glass"] {
+  --bg: #f2f5ef;
+  --ink: #203c32;
+  --muted: #52645a;
+  --accent: #294b3c;
+  --soft: #e4ece0;
+  --surface: rgba(255, 255, 255, 0.7);
+  --border: rgba(65, 97, 72, 0.17);
+  --radius: 22px;
+  --shadow: 0 20px 65px rgba(25, 56, 36, 0.08);
+}
+[data-theme="glass"] body {
+  background:
+    radial-gradient(ellipse at 0 28%, #e1eadb 0, transparent 36%),
+    radial-gradient(ellipse at 100% 60%, #e5eade 0, transparent 35%), var(--bg);
+}
+[data-theme="glass"] .header {
+  height: 96px;
+  max-width: 1280px;
+  padding: 0 36px;
+  border-color: var(--border);
+}
+[data-theme="glass"] .style-bar {
+  max-width: 1280px;
+  padding: 20px 36px 8px;
+}
+[data-theme="glass"] .edition {
+  display: none;
+}
+[data-theme="glass"] .theme-switch {
+  background: #ffffff80;
+  border-color: #ffffff;
+  box-shadow: 0 4px 15px #294b3c08;
+}
+[data-theme="glass"] .hero {
+  max-width: 1208px;
+  min-height: 790px;
+  margin: 24px auto 36px;
+  padding: 40px;
+  display: grid;
+  grid-template-columns: minmax(0, 500px) 1fr;
+  align-items: center;
+  gap: 0;
+  border-radius: 30px;
+  overflow: hidden;
+  isolation: isolate;
+  background: #e6ede1;
+  border: 1px solid #ffffff;
+  box-shadow: 0 20px 65px #294b3c12;
+}
+[data-theme="glass"] .hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    #e6ede1 0%,
+    #e6ede1dc 22%,
+    #e6ede144 48%,
+    transparent 70%
+  );
+}
+[data-theme="glass"] .hero-copy {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+  max-width: 500px;
+  padding: 36px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.74);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow:
+    0 10px 40px #183a2110,
+    inset 0 1px 0 #fff;
+}
+[data-theme="glass"] .hero-copy h1 {
+  font-size: clamp(3rem, 5vw, 4.5rem);
+  line-height: 1.22;
+  letter-spacing: -0.025em;
+  margin-bottom: 24px;
+}
+[data-theme="glass"] .hero-copy .eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  margin-bottom: 24px;
+}
+[data-theme="glass"] .hero-description {
+  max-width: 32ch;
+  font-size: 15px;
+  line-height: 1.85;
+  margin-bottom: 24px;
+}
+[data-theme="glass"] .couple-names {
+  font-size: clamp(1.65rem, 2.6vw, 2rem);
+  line-height: 1.6;
+  gap: 0.2em 0.3em;
+}
+[data-theme="glass"] .hero-date {
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  margin: 16px 0 28px;
+}
+[data-theme="glass"] .guest-intro {
+  border-top: 1px solid var(--border);
+  padding-top: 23px;
+}
+[data-theme="glass"] .guest-intro > span {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+}
+[data-theme="glass"] .guest-intro p {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin: 8px 0 25px;
+  line-height: 1.55;
+}
+[data-theme="glass"] .open-button {
+  min-height: 50px;
+  min-width: 0;
+  max-width: 100%;
+  padding: 13px 20px;
+  border-radius: 12px;
+  font-size: 13px;
+  box-shadow: 0 5px 18px #294b3c20;
+}
+[data-theme="glass"] .button-spark {
+  display: none;
+}
+[data-theme="glass"] .hero-replay {
+  display: block;
+  min-height: 44px;
+  background: none;
+  padding: 12px 0 0;
+  font-size: 11px;
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+[data-theme="glass"] .hero .interaction-hint {
+  display: none;
+}
+[data-theme="glass"] .hero-art {
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: 66%;
+  height: 100%;
+  max-width: none;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  z-index: 0;
+}
+[data-theme="glass"] .hero-image {
+  height: 100%;
+  width: 100%;
+  border-radius: 0;
+  box-shadow: none;
+}
+[data-theme="glass"] .hero-image img {
+  height: 100%;
+  width: 100%;
+  object-position: 50% 28%;
+}
+[data-theme="glass"] .image-shade {
+  background: linear-gradient(0deg, #1d35281c, transparent 50%);
+}
+[data-theme="glass"] .hero .arch-outline,
+[data-theme="glass"] .hero .vertical-note,
+[data-theme="glass"] .hero .art-star,
+[data-theme="glass"] .hero .photo-note,
+[data-theme="glass"] .hero-bottom {
+  display: none;
+}
+[data-theme="glass"] .intro-section {
+  padding-top: 80px;
+  padding-bottom: 60px;
+}
+[data-theme="glass"] .section-heading {
+  margin-bottom: 48px;
+}
+[data-theme="glass"] .section-heading p:last-child {
+  max-width: 46ch;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.9;
+}
+[data-theme="glass"] .surface {
+  background: linear-gradient(135deg, #ffffffd6, #ffffff91);
+  border: 1px solid #ffffff;
+  border-radius: 26px;
+  box-shadow:
+    0 15px 55px #294b3c0d,
+    inset 0 1px 0 #fff;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+[data-theme="glass"] .story-photo {
+  padding: 10px;
+  border-color: #ffffff;
+  border-radius: 210px 210px 18px 18px;
+  background: #ffffff80;
+  box-shadow: var(--shadow);
+}
+[data-theme="glass"] .story-photo img {
+  border-radius: 200px 200px 10px 10px;
+}
+[data-theme="glass"] .story-photo.reveal.visible {
+  transform: none;
+}
+[data-theme="glass"] .story-copy p:not(.eyebrow):not(.small-note) {
+  line-height: 1.95;
+}
+[data-theme="glass"] .event-card {
+  max-width: 900px;
+  padding: 48px;
+}
+[data-theme="glass"] .event-date > strong {
+  color: var(--accent);
+  font-size: 6rem;
+}
+[data-theme="glass"] .timeline-icon {
+  background: #ffffffb3;
+  border: 1px solid #ffffff;
+  box-shadow: 0 5px 20px #294b3c0a;
+}
+[data-theme="glass"] .gallery-grid {
+  gap: 18px;
+}
+[data-theme="glass"] .gallery-item {
+  border-radius: 18px;
+  border: 5px solid #ffffff99;
+  box-shadow: 0 8px 30px #294b3c0a;
+}
+[data-theme="glass"] .rsvp-card {
+  padding: 36px;
+}
+[data-theme="glass"] .rsvp-card form > label {
+  margin-top: 22px;
+}
+[data-theme="glass"] input,
+[data-theme="glass"] select,
+[data-theme="glass"] textarea {
+  background: #ffffff9c;
+  border: 1px solid #9ba99b66;
+  border-radius: 10px;
+}
+[data-theme="glass"] input[readonly] {
+  background: #eaf0e7c7;
+}
+[data-theme="glass"] .attendance label {
+  border-radius: 10px;
+  min-height: 50px;
+}
+[data-theme="glass"] .attendance label.selected {
+  background: #e5eee2c9;
+}
+[data-theme="glass"] .closing {
+  margin: 20px 24px 0;
+  border-radius: 28px;
+}
+[data-theme="glass"] .closing:after {
+  background: #102a1ab8;
+}
+/* Preserve the reference envelope while giving its frame a coherent glass setting. */
+[data-theme="glass"] .opening-screen {
+  background: #20372c;
+}
+[data-theme="glass"] .opening-screen:before {
+  content: "";
+  position: absolute;
+  inset: -35px;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(#162e24bd, #162e24e6),
+    url("/photos/NHV04979-small.webp") center 38% / cover;
+  filter: blur(24px);
+}
+[data-theme="glass"] .opening-stage {
+  border: 1px solid #fff6;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow:
+    0 25px 90px #07170e70,
+    0 0 0 8px #ffffff0a;
+}
+[data-theme="glass"] .opening-themes {
+  background: #ffffff12;
+  border-color: #ffffff40;
+}
+[data-theme="glass"] .opening-next {
+  border-radius: 12px;
+}
+@media (max-width: 1280px) and (min-width: 701px) {
+  [data-theme="glass"] .hero {
+    margin-left: 28px;
+    margin-right: 28px;
+    padding: 32px;
+    grid-template-columns: minmax(0, 47%) 1fr;
+    min-height: 760px;
+  }
+  [data-theme="glass"] .hero-copy {
+    padding: 28px;
+  }
+  [data-theme="glass"] .hero-copy h1 {
+    font-size: clamp(2.7rem, 5.2vw, 4rem);
+  }
+}
+@media (max-width: 900px) and (min-width: 701px) {
+  [data-theme="glass"] .hero {
+    grid-template-columns: minmax(0, 55%) 1fr;
+    padding: 24px;
+  }
+  [data-theme="glass"] .hero-art {
+    width: 65%;
+  }
+  [data-theme="glass"] .hero-copy {
+    padding: 26px;
+  }
+  [data-theme="glass"] .hero-description {
+    font-size: 14px;
+  }
+  [data-theme="glass"] .couple-names {
+    font-size: 1.65rem;
+  }
+  [data-theme="glass"] .event-card {
+    padding: 32px;
+  }
+}
+@media (max-width: 700px) {
+  [data-theme="glass"] .header {
+    height: 84px;
+    padding: 0 22px;
+  }
+  [data-theme="glass"] .style-bar {
+    padding: 18px 18px 4px;
+  }
+  [data-theme="glass"] .style-caption {
+    display: none;
+  }
+  [data-theme="glass"] .hero {
+    margin: 18px 16px 32px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    min-height: 0;
+    border: 0;
+    border-radius: 0;
+    overflow: visible;
+    background: none;
+    box-shadow: none;
+  }
+  [data-theme="glass"] .hero:after {
+    display: none;
+  }
+  [data-theme="glass"] .hero-art {
+    position: relative;
+    inset: auto;
+    order: 0;
+    width: 100%;
+    max-width: none;
+    min-height: 0;
+    height: clamp(340px, 108vw, 465px);
+    margin: 0;
+    padding: 0;
+    border-radius: 26px;
+    overflow: hidden;
+  }
+  [data-theme="glass"] .hero-image {
+    height: 100%;
+    border-radius: 0;
+  }
+  [data-theme="glass"] .hero-image img {
+    object-position: 50% 24%;
+  }
+  [data-theme="glass"] .hero-copy {
+    order: 1;
+    width: calc(100% - 20px);
+    max-width: 470px;
+    margin: -62px auto 0;
+    padding: 28px 22px 23px;
+    text-align: center;
+    background: #ffffffd9;
+    border-radius: 22px;
+    box-shadow: 0 15px 45px #294b3c14;
+  }
+  [data-theme="glass"] .hero-copy .eyebrow {
+    justify-content: center;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+  }
+  [data-theme="glass"] .hero-copy h1 {
+    font-size: clamp(2.65rem, 11.5vw, 3.4rem);
+    line-height: 1.25;
+    margin-bottom: 18px;
+  }
+  [data-theme="glass"] .hero-description {
+    font-size: 14px;
+    line-height: 1.9;
+    margin: 0 auto 22px;
+    max-width: 30ch;
+  }
+  [data-theme="glass"] .couple-names {
+    justify-content: center;
+    font-size: clamp(1.35rem, 5.9vw, 1.85rem);
+    gap: 0.18em 0.25em;
+  }
+  [data-theme="glass"] .hero-date {
+    justify-content: center;
+    font-size: 12px;
+    margin: 15px 0 24px;
+  }
+  [data-theme="glass"] .guest-intro {
+    padding-top: 21px;
+  }
+  [data-theme="glass"] .guest-intro p {
+    font-size: 1.35rem;
+    margin: 8px 0 23px;
+  }
+  [data-theme="glass"] .open-button {
+    min-height: 50px;
+    font-size: 12px;
+    padding: 12px 20px;
+    justify-content: center;
+  }
+  [data-theme="glass"] .hero-replay {
+    margin: 4px auto 0;
+    padding-top: 9px;
+  }
+  [data-theme="glass"] .intro-section {
+    padding: 52px 24px 42px;
+  }
+  [data-theme="glass"] .story-section {
+    gap: 36px;
+    padding-top: 36px;
+  }
+  [data-theme="glass"] .story-photo {
+    border-radius: 200px 200px 18px 18px;
+  }
+  [data-theme="glass"] .section-heading {
+    margin-bottom: 32px;
+  }
+  [data-theme="glass"] .event-card {
+    padding: 30px 24px;
+  }
+  [data-theme="glass"] .rsvp-card {
+    padding: 28px 22px;
+  }
+  [data-theme="glass"] .closing {
+    margin: 0 12px;
+    border-radius: 20px;
+  }
+  [data-theme="glass"] .opening-stage {
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+@supports not (backdrop-filter: blur(1px)) {
+  [data-theme="glass"] .hero-copy,
+  [data-theme="glass"] .surface {
+    background: #f9fbf5;
+  }
+}
