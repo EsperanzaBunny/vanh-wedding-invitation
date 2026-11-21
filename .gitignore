@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.env*
+!.env.example
+.vercel/
+test-results/
+.DS_Store
+
+# Local agent metadata and hosting identity
+.agents/
+.codex/
+.openai/
+
+# Original photos and reference videos; optimized web assets are in public/
+assets/

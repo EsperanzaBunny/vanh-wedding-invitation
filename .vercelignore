@@ -1,0 +1,12 @@
+node_modules
+.vercel
+.git
+.agents
+.openai
+assets
+supabase
+tests
+docs
+design-system
+.env*
+README.md

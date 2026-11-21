@@ -1,0 +1,276 @@
+/* Playfair Display gives the invitation its editorial character.
+   Bundled Be Vietnam Pro keeps controls readable and provides a complete fallback. */
+:root {
+  --sans: "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-family: var(--sans);
+}
+body {
+  line-height: 1.65;
+}
+h1,
+h2,
+h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  overflow-wrap: break-word;
+}
+h1,
+.hero-copy h1 {
+  font-size: clamp(3rem, 6.2vw, 5.5rem);
+  line-height: 1.28;
+  letter-spacing: -0.02em;
+}
+h1 em,
+h2 em {
+  font-weight: 400;
+}
+h2,
+.section-heading h2,
+.intro-section h2,
+.story-copy h2,
+.rsvp-copy h2,
+.closing h2 {
+  font-size: clamp(2rem, 3.7vw, 3.15rem);
+  line-height: 1.4;
+  letter-spacing: -0.025em;
+}
+h3,
+.rsvp-card h3 {
+  font-size: 1.5rem;
+  line-height: 1.5;
+}
+.hero-copy,
+.story-copy,
+.event-venue,
+.rsvp-card,
+.rsvp-copy {
+  min-width: 0;
+}
+.hero-copy {
+  padding-bottom: 15px;
+}
+.hero-copy .eyebrow {
+  font-size: 0.6875rem;
+  letter-spacing: 0.15em;
+}
+.hero-description {
+  margin-top: 12px;
+}
+.couple-names {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2em 0.35em;
+  font-family: var(--serif);
+  font-size: clamp(1.6rem, 2.8vw, 2.25rem);
+  line-height: 1.65;
+  font-weight: 500;
+}
+.couple-names .person-name {
+  font: inherit;
+  color: var(--ink);
+  margin: 0;
+  white-space: nowrap;
+}
+.couple-names .ampersand {
+  font-size: 0.8em;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--muted);
+  margin: 0;
+}
+.guest-intro p {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  line-height: 1.65;
+  font-weight: 500;
+}
+.eyebrow,
+.guest-intro > span {
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+}
+.theme-switch button,
+.header nav button,
+.mobile-rsvp {
+  font-size: 0.8125rem;
+}
+.theme-switch button {
+  min-height: 44px;
+}
+.monogram {
+  font-weight: 400;
+  font-size: 1.875rem;
+  letter-spacing: -0.08em;
+  line-height: 1.3;
+}
+.monogram i {
+  margin: 0 3px;
+  font-size: 1.25rem;
+}
+.monogram span {
+  font-size: 0.625rem;
+  letter-spacing: 0.1em;
+}
+.hero-date {
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+}
+.edition,
+.style-caption,
+.interaction-hint {
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+}
+.open-button {
+  min-width: 0;
+  max-width: 100%;
+  font-size: 0.8125rem;
+  padding: 14px 18px;
+}
+.hero-bottom {
+  font-size: 0.625rem;
+  line-height: 1.8;
+  letter-spacing: 0.08em;
+}
+.hero-bottom span {
+  overflow-wrap: anywhere;
+}
+.signature,
+.closing div > p:last-child {
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.6;
+}
+.photo-note,
+.photo-script {
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.6;
+  padding: 0 18px;
+}
+.story-copy .small-note {
+  font-size: 1.125rem;
+  line-height: 1.7;
+}
+.rsvp-copy .handwritten {
+  font-size: 1.25rem !important;
+  font-style: italic;
+  line-height: 1.8;
+}
+.event-venue h3 {
+  font-size: clamp(1.375rem, 2.5vw, 2rem);
+  line-height: 1.5;
+}
+.event-date > strong {
+  font-size: 5rem;
+  line-height: 1.4;
+  font-weight: 400;
+}
+.families p {
+  font-size: 1rem !important;
+  line-height: 1.8;
+}
+.timeline h3 {
+  font-size: 1.25rem;
+  line-height: 1.5;
+}
+.host-panel h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.45;
+}
+.host-stats strong {
+  font-size: 2rem;
+  line-height: 1.4;
+}
+.attendance label {
+  min-width: 0;
+}
+@media (max-width: 1000px) and (min-width: 701px) {
+  .hero {
+    padding-left: 32px;
+    padding-right: 32px;
+    gap: 35px;
+  }
+  .hero-copy h1 {
+    font-size: clamp(2.7rem, 5.8vw, 3.75rem);
+  }
+  .style-bar {
+    flex-wrap: wrap;
+  }
+  .edition {
+    margin-left: 0;
+  }
+  .rsvp-section {
+    gap: 30px;
+  }
+  .attendance {
+    flex-direction: column;
+  }
+}
+@media (max-width: 700px) {
+  .hero-copy h1 {
+    font-size: clamp(2.9rem, 11.5vw, 3.9rem);
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+  }
+  .couple-names {
+    justify-content: center;
+    font-size: clamp(1.35rem, 6vw, 1.9rem);
+    gap: 0.2em 0.25em;
+  }
+  .guest-intro p {
+    font-size: 1.4rem;
+  }
+  .hero-description br {
+    display: none;
+  }
+  .hero-description {
+    max-width: 30ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-description br::after {
+    content: " ";
+  }
+  .theme-switch button {
+    font-size: 0.75rem;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  .hero-art {
+    margin-top: 38px;
+  }
+  .hero-bottom {
+    font-size: 0.5625rem;
+    letter-spacing: 0.02em;
+  }
+  .attendance {
+    flex-direction: column;
+  }
+  .attendance label {
+    font-size: 0.8125rem;
+  }
+  .closing .eyebrow {
+    font-size: 0.625rem;
+    letter-spacing: 0.06em;
+  }
+  footer {
+    font-size: 0.6875rem;
+  }
+  footer button {
+    font-size: 0.75rem;
+  }
+  .families {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal.visible {
+    animation: none;
+  }
+}
